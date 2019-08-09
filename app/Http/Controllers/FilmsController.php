@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Apis\GetRemoteData;
 
 class FilmsController extends Controller
 {
+    public function __construct() {
+
+        $this->filmsData = GetRemoteData::get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,16 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        //
+        $filmsDataArr = $this->filmsData;
+ //       $filmTitleArr = array_column($this->filmsDataArr,'title');
+        // $fileDirectorArr = array_column($this->filmsDataArr,'director');
+        // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
+        // $filmeReleDateArr = array_column($this->filmsDataArr,'release_date');
+        //dd($fileDirectorArr);
+        return view('homepage',compact('filmsDataArr'));
+//                                       '$fileDirectorArr',
+//                                        'filmEpiIdArr',
+//                                        'filmeReleDateArr'));
     }
 
     /**

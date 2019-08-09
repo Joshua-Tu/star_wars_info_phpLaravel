@@ -11,16 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    //return view('welcome');
+Route::get('/','FilmsController@index');
 
-    // require './vender/autoload.php';
-    // $client = new \GuzzleHttp\Client();
-    // $response = $client->request('GET', 'https://swapi.co/api/films');
-    // echo $response->getStatusCode();
-    
-    $fetchedData = file_get_contents('https://swapi.co/api/films');
-    $decodeData = json_decode($fetchedData, true);
-    $films = array_column($decodeData['results'],'title');
-    return view('welcome',compact('films'));
-});
+
+// Route::get('/', function () {
+//     //return view('welcome');
+
+//     // $fetchedData = file_get_contents('https://swapi.co/api/films');
+//     // $decodeData = json_decode($fetchedData, true);
+//     // $films = array_column($decodeData['results'],'title');
+//     // return view('welcome',compact('films'));
+
+//     $filmsDataArr = GetRemoteData::get();
+//     $filmTitleArr = array_column($filmsDataArr,'title');
+//     dd($filmTitleArr);
+// });
