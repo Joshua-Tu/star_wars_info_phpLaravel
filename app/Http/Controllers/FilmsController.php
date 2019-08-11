@@ -24,11 +24,6 @@ class FilmsController extends Controller
         $orderedFilmsArr =  $this->orderedFilmsDataArr;
         
         // dd($_GET['search']);
-        // $filmTitleArr = array_column($this->filmsDataArr,'title');
-        // $fileDirectorArr = array_column($this->filmsDataArr,'director');
-        // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
-        // $filmeReleDateArr = array_column($this->filmsDataArr,'release_date');
-        //dd($fileDirectorArr);
         return view('pages.homepage',compact('orderedFilmsArr'));
 
     }
