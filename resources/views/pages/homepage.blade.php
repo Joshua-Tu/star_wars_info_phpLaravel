@@ -18,10 +18,10 @@
         @foreach($orderedFilmsDataArr as $filmData)
                 <li>
                     <h3>{{$filmData['title']}}</h3>
-                    <p>Episode: {{$filmData['episode_id']}}</p>
                     <p>Director: {{$filmData['director']}}
+                    <p>Episode: {{$filmData['episode_id']}}</p>
                     <p>Release Date: {{$filmData['release_date']}}</p>
-                    <a href="#">details</a>
+                    <a href="/film/{{$filmData['episode_id']}}">details</a>
                 </li>
         @endforeach  
     </ul>

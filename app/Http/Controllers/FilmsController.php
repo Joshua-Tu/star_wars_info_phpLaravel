@@ -10,7 +10,7 @@ class FilmsController extends Controller
 {
     public function __construct() {
 
-        $this->filmsData = GetRemoteData::get();
+        $this->filmsData = GetRemoteData::get('films');
     }
     /**
      * Display a listing of the resource.
@@ -18,11 +18,9 @@ class FilmsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $filmsDataArr = $this->filmsData;
-        
+    {           
         //The array_sort laravel helper function sorts the array by the results of the given Closure:
-        $orderedFilmsDataArr = array_values(array_sort($filmsDataArr, function ($value) {
+        $orderedFilmsDataArr = array_values(array_sort($this->filmsData, function ($value) {
             return $value['episode_id'];
         }));
         
@@ -32,7 +30,7 @@ class FilmsController extends Controller
         // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
         // $filmeReleDateArr = array_column($this->filmsDataArr,'release_date');
         //dd($fileDirectorArr);
-        return view('homepage',compact('orderedFilmsDataArr'));
+        return view('pages.homepage',compact('orderedFilmsDataArr'));
 
     }
 
@@ -64,8 +62,13 @@ class FilmsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        
+    {   
+        $filmsDataArr = $this->filmsData;        
+        $filmEpiIdArr = array_column($this->filmsData,'episode_id');
+        if(in_array($id, $filmEpiIdArr)){
+            return view('pages.filmInfoPage',compact('id'));
+        }
+        echo '<h1>Page not found</h1>';
     }
 
     /**
