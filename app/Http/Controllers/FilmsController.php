@@ -17,8 +17,9 @@ class FilmsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $filmsDataArr = $this->filmsData;
+        //dd($_GET['search']);
  //       $filmTitleArr = array_column($this->filmsDataArr,'title');
         // $fileDirectorArr = array_column($this->filmsDataArr,'director');
         // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
@@ -59,7 +60,7 @@ class FilmsController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

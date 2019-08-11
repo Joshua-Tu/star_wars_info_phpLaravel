@@ -13,6 +13,7 @@
 
 Route::get('/','FilmsController@index');
 
+Route::get('/show/{id}', 'FilmsController@show');
 
 // Route::get('/', function () {
 //     //return view('welcome');
