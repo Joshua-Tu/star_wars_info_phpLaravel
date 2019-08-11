@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Apis\GetRemoteData;
 
+
 class FilmsController extends Controller
 {
     public function __construct() {
@@ -19,16 +20,20 @@ class FilmsController extends Controller
     public function index()
     {   
         $filmsDataArr = $this->filmsData;
-        //dd($_GET['search']);
- //       $filmTitleArr = array_column($this->filmsDataArr,'title');
+        
+        //The array_sort laravel helper function sorts the array by the results of the given Closure:
+        $orderedFilmsDataArr = array_values(array_sort($filmsDataArr, function ($value) {
+            return $value['episode_id'];
+        }));
+        
+        // dd($_GET['search']);
+        // $filmTitleArr = array_column($this->filmsDataArr,'title');
         // $fileDirectorArr = array_column($this->filmsDataArr,'director');
         // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
         // $filmeReleDateArr = array_column($this->filmsDataArr,'release_date');
         //dd($fileDirectorArr);
-        return view('homepage',compact('filmsDataArr'));
-//                                       '$fileDirectorArr',
-//                                        'filmEpiIdArr',
-//                                        'filmeReleDateArr'));
+        return view('homepage',compact('orderedFilmsDataArr'));
+
     }
 
     /**
