@@ -1,19 +1,23 @@
 @extends('layouts.app')
 
+
 @section('header')
-    <div class="container">
         <h1 class="center">Star Wars Info</h1>
         <p>All the information about Star Wars movies that you should know!</p>
-    </div>
 @stop
 
-@section('content')
-    {{-- <form method="GET" action="/" onkeydown="this.submit();"> --}}
+
+@section('searchBar')
+{{-- <form method="GET" action="/" onkeydown="this.submit();"> --}}
     <label>Search:
-            <input type='search' name="search" placeholder="by words in film title" /> 
-        </label>
-        {{-- <button type="submit">Search</button> --}}
-    {{-- </form> --}}
+        <input type='search' name="search" placeholder="by words in film title" /> 
+    </label>
+    {{-- <button type="submit">Search</button> --}}
+{{-- </form> --}}        
+@stop
+
+
+@section('content')
     <ul>
         @foreach($orderedFilmsArr as $filmData)
                 <li>

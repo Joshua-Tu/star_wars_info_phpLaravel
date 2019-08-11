@@ -4,11 +4,11 @@ namespace App\Http\Apis;
 
 class GetRemoteData {
   
-  public static function get($dataName)
+  public static function getFilms()
   {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://swapi.co/api/']);
     //$res = $client->request('GET', "films/?search=" . $_GET["search"]);
-    $res = $client->request('GET', $dataName);
+    $res = $client->request('GET', "films");
     $statusCode= $res->getStatusCode();
     $header= $res->getHeader('content-type');
     $data = $res->getBody()->getContents();

@@ -12,7 +12,7 @@ class FilmsController extends Controller
 
     public function __construct() {
         //The array_sort LARAVEL HELPER FUNCTION sorts the array by the results of the given Closure:
-        $this->orderedFilmsDataArr = array_values(array_sort(GetRemoteData::get('films'), 
+        $this->orderedFilmsDataArr = array_values(array_sort(GetRemoteData::getFilms(), 
             function ($value) {
                 return $value['episode_id'];  //ordered with episode_id number
             }));
@@ -36,14 +36,16 @@ class FilmsController extends Controller
 
     public function show($id)
     {   
-        $orderedFilmsArr =  $this->orderedFilmsDataArr;        
+        $orderedFilmsArr =  $this->orderedFilmsDataArr;
         $filmEpiIdArr = array_column($orderedFilmsArr,'episode_id');
         if(in_array($id, $filmEpiIdArr)){
-            $filmInfo = $filmsDataArr[$id - 1]; //episode_id starts with 1
-            dd($filmInfo);
-            return view('pages.filmInfoPage',compact('id'));
+            $filmData = $orderedFilmsArr[$id - 1];
+            $charactersArr = [];
+            
+            return view('pages.filmInfoPage',compact(
+                'filmData'
+            ));
         }
         echo '<h1>Page not found</h1>';
     }
-    
 }

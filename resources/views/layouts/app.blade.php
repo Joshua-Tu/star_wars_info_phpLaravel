@@ -12,9 +12,11 @@
     </head>
     <body>
         <div class="container">
-            <div class="jumbotron">
+            <div class="jumbotron"> 
                 @yield('header')
             </div>
+            @yield('navbar') {{-- Only on film Info page --}}
+            @yield('searchBar')  {{-- Only on film list page --}}
             @yield('content')
         </div>
     </body>
