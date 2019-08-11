@@ -15,7 +15,7 @@
         {{-- <button type="submit">Search</button> --}}
     {{-- </form> --}}
     <ul>
-        @foreach($orderedFilmsDataArr as $filmData)
+        @foreach($orderedFilmsArr as $filmData)
                 <li>
                     <h3>{{$filmData['title']}}</h3>
                     <p>Director: {{$filmData['director']}}

@@ -8,21 +8,20 @@ use App\Http\Apis\GetRemoteData;
 
 class FilmsController extends Controller
 {
-    public function __construct() {
+    protected $orderedFilmsDataArr;
 
-        $this->filmsData = GetRemoteData::get('films');
+    public function __construct() {
+        //The array_sort LARAVEL HELPER FUNCTION sorts the array by the results of the given Closure:
+        $this->orderedFilmsDataArr = array_values(array_sort(GetRemoteData::get('films'), 
+            function ($value) {
+                return $value['episode_id'];  //ordered with episode_id number
+            }));
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {           
-        //The array_sort laravel helper function sorts the array by the results of the given Closure:
-        $orderedFilmsDataArr = array_values(array_sort($this->filmsData, function ($value) {
-            return $value['episode_id'];
-        }));
+        $orderedFilmsArr =  $this->orderedFilmsDataArr;
         
         // dd($_GET['search']);
         // $filmTitleArr = array_column($this->filmsDataArr,'title');
@@ -30,78 +29,21 @@ class FilmsController extends Controller
         // $filmEpiIdArr = array_column($this->filmsDataArr,'episode_id');
         // $filmeReleDateArr = array_column($this->filmsDataArr,'release_date');
         //dd($fileDirectorArr);
-        return view('pages.homepage',compact('orderedFilmsDataArr'));
+        return view('pages.homepage',compact('orderedFilmsArr'));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {   
-        $filmsDataArr = $this->filmsData;        
-        $filmEpiIdArr = array_column($this->filmsData,'episode_id');
+        $orderedFilmsArr =  $this->orderedFilmsDataArr;        
+        $filmEpiIdArr = array_column($orderedFilmsArr,'episode_id');
         if(in_array($id, $filmEpiIdArr)){
+            $filmInfo = $filmsDataArr[$id - 1]; //episode_id starts with 1
+            dd($filmInfo);
             return view('pages.filmInfoPage',compact('id'));
         }
         echo '<h1>Page not found</h1>';
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="container">
-        <h1 class="center">FILM <TITLE></TITLE></h1>
+        <h1 class="center">FILM TITLE</h1>
         <p>Episode ID</p>
         <p>Director</p>
         <p>Producer</p>
@@ -14,11 +14,9 @@
 @section('content')
     <h1>This is {{$id}}</h1>
     <p>opening_crawl</p>
-    <p>characters</p>
-    <p>species</p>
-    <p>starships</p>
-    <p>vehicle</p>
-    <p>planets</p>
-
-    
+    <p>characters Array  with tooltip</p>
+    <p>species Array</p>
+    <p>starships Array</p>
+    <p>vehicle Array</p>
+    <p>Planets Array</p>   
 @endsection
