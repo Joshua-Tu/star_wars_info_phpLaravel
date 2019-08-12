@@ -40,5 +40,7 @@
             @yield('searchBar')  {{-- Only on film list page --}}
             @yield('content')
         </div>
+        {{-- put javascript in footer section, this section is only for home page --}}
+            @yield('footer')
     </body>
 </html>

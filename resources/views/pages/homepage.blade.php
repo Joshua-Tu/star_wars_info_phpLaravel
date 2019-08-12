@@ -17,16 +17,17 @@
 
     <div class="ui category search">
         <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="Search movies">
+                <input id="searchInput" class="prompt" type="text" placeholder="Search movies" onKeyUp="handleSearch()">
                 <i class="search icon"></i>
         </div>
         <div class="results"></div>
     </div>
+
 @stop
 
 
 @section('content')
-    <ul>
+    <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
                 <div class="ui container">
                     <br />
@@ -40,4 +41,23 @@
                 </div>
         @endforeach  
     </ul>
+@stop
+
+@section('footer')
+    <script type="text/javascript">
+        const handleSearch = () => {
+            let input = document.querySelector("input");
+            let searchValue = input.value.toUpperCase()
+            let ul = document.querySelector('#search-field');
+            let ulDiv = ul.getElementsByTagName('div');
+            for(let i = 0; i < ulDiv.length; i++) {
+                let filmTitle = ulDiv[i].querySelector('h3').innerHTML;
+                if (filmTitle.toUpperCase().indexOf(searchValue) === -1) {
+                    ulDiv[i].style.display = 'none';
+                } else {
+                    ulDiv[i].style.display = '';
+                }
+            }
+        }
+    </script>
 @stop
