@@ -29,12 +29,19 @@
 @section('content')
     <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
-                <div class="ui container">
+                <div class="ui container filmItem">
                     <br />
                     <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
                     <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
                     <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
                     <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
+
+                    <label onClick="handleFavo()" >
+                        <h4 class="ui medium red header">Favourite
+                            <input type="checkbox" onLoad="checkFavoStatus" />
+                        </h4>
+                    </label>
+
                     <button class="ui orange basic button">
                         <a href="/film/{{$filmData['episode_id']}}">details</a>
                     </button>
@@ -49,14 +56,23 @@
             let input = document.querySelector("input");
             let searchValue = input.value.toUpperCase()
             let ul = document.querySelector('#search-field');
-            let ulDiv = ul.getElementsByTagName('div');
-            for(let i = 0; i < ulDiv.length; i++) {
-                let filmTitle = ulDiv[i].querySelector('h3').innerHTML;
+            let filmItem = ul.getElementsByClassName('filmItem');
+            for(let i = 0; i < filmItem.length; i++) {
+                let filmTitle = filmItem[i].querySelector('h3').innerHTML;
                 if (filmTitle.toUpperCase().indexOf(searchValue) === -1) {
-                    ulDiv[i].style.display = 'none';
+                    filmItem[i].style.display = 'none';
                 } else {
-                    ulDiv[i].style.display = '';
+                    filmItem[i].style.display = '';
                 }
+            }
+        }
+
+        const handleFavo = () => {
+            let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
+            if(checkbox[0].checked) {
+                window.localStorage.setItem("<?php echo $filmData['title'] ?>",'Joshua');
+            } else {
+                window.localStorage.removeItem("<?php echo $filmData['title'] ?>");
             }
         }
     </script>
