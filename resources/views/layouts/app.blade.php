@@ -33,7 +33,7 @@
             }
             </style>
     </head>
-    <body style="text-align:center;" >
+    <body style="text-align:center;" onload="handleFavoCheckBoxReload()">
         <div class="ui container" style="padding-top:2em;padding-bottom:2em">
             @yield('header')
             @yield('navbar') {{-- Only on film Info page --}}

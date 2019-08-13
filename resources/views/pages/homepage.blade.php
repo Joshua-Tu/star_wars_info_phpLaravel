@@ -38,7 +38,7 @@
 
                     <label >
                         <h4 class="ui medium red header">Favourite
-                        <input type="checkbox" id="{{$filmData['title']}}" onClick="handleFavo(this.id)" />
+                        <input type="checkbox" id="{{$filmData['title']}}" class="checkbox" onClick="handleFavo(this.id)" />
                         </h4>
                     </label>
 
@@ -70,7 +70,6 @@
 
         const handleFavo = (checkBoxID) => {
             let checkbox = document.getElementById(checkBoxID);
-            console.log(checkbox.checked);
             if(checkbox.checked) {
                 window.localStorage.setItem(checkBoxID,'favourited');
                 
@@ -78,15 +77,19 @@
                 window.localStorage.removeItem(checkBoxID);
   
             }
+            console.log(window.localStorage);
         }
 
-        const checkFavoStatus = () => {
-            let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
-            if (window.localStorage.hasOwnProperty("<?php echo $filmData['title'] ?>")) {
-                checkbox[0].checked = true;
-                console.log(checkbox[0].checked);
-            } else {
-                checkbox[0].checked = false;
+
+        const handleFavoCheckBoxReload = () => {
+            let checkboxes = document.getElementsByClassName('checkbox');
+            let locolStoreKeys = Object.keys(window.localStorage);
+            if (locolStoreKeys.length !== 0) {
+                for(let i = 0; i < checkboxes.length; i++) {
+                    if(locolStoreKeys.includes(checkboxes[i].id)) {
+                        checkboxes[i].checked = true;
+                    }
+                }
             }
         }
     </script>
