@@ -3,7 +3,7 @@
 
 @section('header')
         <h1 class="ui huge brown header">Star Wars Info</h1>
-        <h2 class="ui blue medium header">All the information about Star Wars movies that you should know!</h2>
+        <h2 class="ui blue large header">All the information about Star Wars movies you should know !</h2>
 @stop
 
 
@@ -30,7 +30,7 @@
 
     <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
-                <div class="ui container filmItem" >
+                <li class="ui container filmItem" >
                     <br />
                     <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
                     <div class="alert-box favoed {{$filmData['title']}}">You favourited this film !!!</div>
@@ -48,7 +48,7 @@
                     <button class="ui orange basic button">
                         <a href="/film/{{$filmData['episode_id']}}">details</a>
                     </button>
-                </div>
+                </li>
         @endforeach  
     </ul>
 @stop
@@ -99,6 +99,7 @@
 
                 window.localStorage.setItem(checkBoxID,'favourited');
                                 
+                
                 //move the favoed div to the top of the list
                 let filmList = document.querySelector('ul');
                 // let filmDataDivs = filmList..getElementsByClassName('filmItem');
