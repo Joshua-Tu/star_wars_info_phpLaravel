@@ -33,14 +33,15 @@
             }
             </style>
     </head>
-    <body style="text-align:center;">
+    <body style="text-align:center;" onload="checkFavoStatus()">
         <div class="ui container" style="padding-top:2em;padding-bottom:2em">
             @yield('header')
             @yield('navbar') {{-- Only on film Info page --}}
             @yield('searchBar')  {{-- Only on film list page --}}
             @yield('content')
         </div>
-        {{-- put javascript in footer section, this section is only for home page --}}
-            @yield('footer')
+        {{-- put javascript in footer section, this section is only for HOMEPAGE --}}
+        @yield('footer')
+
     </body>
 </html>

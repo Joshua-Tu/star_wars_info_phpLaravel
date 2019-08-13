@@ -29,7 +29,7 @@
 @section('content')
     <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
-                <div class="ui container filmItem">
+                <div class="ui container filmItem" >
                     <br />
                     <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
                     <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
@@ -38,7 +38,7 @@
 
                     <label onClick="handleFavo()" >
                         <h4 class="ui medium red header">Favourite
-                            <input type="checkbox" onLoad="checkFavoStatus" />
+                            <input type="checkbox" />
                         </h4>
                     </label>
 
@@ -49,6 +49,7 @@
         @endforeach  
     </ul>
 @stop
+
 
 @section('footer')
     <script type="text/javascript">
@@ -70,9 +71,22 @@
         const handleFavo = () => {
             let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
             if(checkbox[0].checked) {
-                window.localStorage.setItem("<?php echo $filmData['title'] ?>",'Joshua');
+                window.localStorage.setItem("<?php echo $filmData['title'] ?>",'favourited');
+                
             } else {
                 window.localStorage.removeItem("<?php echo $filmData['title'] ?>");
+  
+            }
+        }
+
+        const checkFavoStatus = () => {
+            let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
+            console.log('onload worked');
+            if (window.localStorage.hasOwnProperty("<?php echo $filmData['title'] ?>")) {
+                checkbox[0].checked = true;
+                console.log(checkbox[0].checked);
+            } else {
+                checkbox[0].checked = false;
             }
         }
     </script>
