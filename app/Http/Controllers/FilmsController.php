@@ -37,24 +37,24 @@ class FilmsController extends Controller
             $filmData = $orderedFilmsArr[$id - 1];
     
             $charactersArr = array_map(function ($characterUrl) {
-                return (array) GetRemoteData::getCharacters($characterUrl);
+                return (array) GetRemoteData::getInfo($characterUrl);
               }, $filmData['characters']);
 
             
             $planets = array_map(function ($planetUrl) {
-                return (array) GetRemoteData::getCharacters($planetUrl);
+                return (array) GetRemoteData::getInfo($planetUrl);
               }, $filmData['planets']);
            
             $species = array_map(function ($specyUrl) {
-                return (array) GetRemoteData::getCharacters($specyUrl);
+                return (array) GetRemoteData::getInfo($specyUrl);
               }, $filmData['species']);
 
             $starships = array_map(function ($starshipUrl) {
-                    return (array) GetRemoteData::getCharacters($starshipUrl);
+                    return (array) GetRemoteData::getInfo($starshipUrl);
                   }, $filmData['starships']);
 
             $vehicles = array_map(function ($vehicleUrl) {
-                return (array) GetRemoteData::getCharacters($vehicleUrl);
+                return (array) GetRemoteData::getInfo($vehicleUrl);
               }, $filmData['vehicles']);
             
             return view('pages.filmInfoPage',compact(

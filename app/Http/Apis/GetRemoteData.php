@@ -16,7 +16,7 @@ class GetRemoteData {
     return $decodedData['results'];
   }
 
-  public static function getCharacters($url)
+  public static function getInfo($url)
   {
     $client = new \GuzzleHttp\Client(['base_uri' => $url]);
     $res = $client->request('GET');

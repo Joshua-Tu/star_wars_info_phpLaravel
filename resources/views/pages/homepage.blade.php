@@ -32,10 +32,9 @@
         @foreach($orderedFilmsArr as $filmData)
                 <div class="ui container filmItem" >
                     <br />
-
                     <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
-                    <div class="alert-box favoed">You favourited this film !!!</div>
-                    <div class="alert-box unfavoed">You unfavourited this film !!!</div>
+                    <div class="alert-box favoed {{$filmData['title']}}">You favourited this film !!!</div>
+                    <div class="alert-box unfavoed {{$filmData['title']}}">You unfavourited this film !!!</div>
                     <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
                     <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
                     <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
@@ -73,17 +72,6 @@
             }
         }
 
-        const handleFavo = (checkBoxID) => {
-            let checkbox = document.getElementById(checkBoxID);
-            if(checkbox.checked) {
-                window.localStorage.setItem(checkBoxID,'favourited');
-            } else {
-                window.localStorage.removeItem(checkBoxID);
-            }
-            console.log(window.localStorage);
-        }
-
-
         const handleFavoCheckBoxReload = () => {
             let checkboxes = document.getElementsByClassName('checkbox');
             let locolStoreKeys = Object.keys(window.localStorage);
@@ -95,5 +83,36 @@
                 }
             }
         }
+
+        const handleFavo = (checkBoxID) => {
+            let checkbox = document.getElementById(checkBoxID);
+            //two alert box in a film item div, index 0 is for favoed, index 1 is for unfavoed
+            let favoedAlertDiv = document.getElementsByClassName(checkBoxID)[0];
+            let unFavoedAlertDiv = document.getElementsByClassName(checkBoxID)[1];
+
+            if(checkbox.checked) {
+                favoedAlertDiv.style.display = 'block';
+                //alert box will be shown for 1.5 seconds
+                setTimeout(() => {
+                    return favoedAlertDiv.style.display = 'none';
+                }, 1500)
+
+                window.localStorage.setItem(checkBoxID,'favourited');
+                                
+                //move the favoed div to the top of the list
+                let filmList = document.querySelector('ul');
+                // let filmDataDivs = filmList..getElementsByClassName('filmItem');
+                // console.log(filmDataDivs.div);
+
+            } else {
+                unFavoedAlertDiv.style.display = 'block';
+                setTimeout(() => {
+                    return unFavoedAlertDiv.style.display = 'none';
+                }, 1500)
+                window.localStorage.removeItem(checkBoxID);
+            }
+            //console.log(window.localStorage);
+        }
+
     </script>
 @stop
