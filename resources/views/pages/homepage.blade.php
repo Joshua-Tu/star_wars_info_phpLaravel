@@ -36,9 +36,9 @@
                     <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
                     <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
 
-                    <label onClick="handleFavo()" >
+                    <label >
                         <h4 class="ui medium red header">Favourite
-                            <input type="checkbox" />
+                        <input type="checkbox" id="{{$filmData['title']}}" onClick="handleFavo(this.id)" />
                         </h4>
                     </label>
 
@@ -68,20 +68,20 @@
             }
         }
 
-        const handleFavo = () => {
-            let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
-            if(checkbox[0].checked) {
-                window.localStorage.setItem("<?php echo $filmData['title'] ?>",'favourited');
+        const handleFavo = (checkBoxID) => {
+            let checkbox = document.getElementById(checkBoxID);
+            console.log(checkbox.checked);
+            if(checkbox.checked) {
+                window.localStorage.setItem(checkBoxID,'favourited');
                 
             } else {
-                window.localStorage.removeItem("<?php echo $filmData['title'] ?>");
+                window.localStorage.removeItem(checkBoxID);
   
             }
         }
 
         const checkFavoStatus = () => {
             let checkbox = document.getElementsByTagName("label")[6].getElementsByTagName('input');
-            console.log('onload worked');
             if (window.localStorage.hasOwnProperty("<?php echo $filmData['title'] ?>")) {
                 checkbox[0].checked = true;
                 console.log(checkbox[0].checked);
