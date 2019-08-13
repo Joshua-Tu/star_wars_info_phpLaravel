@@ -14,7 +14,6 @@
     </label> --}}
     {{-- <button type="submit">Search</button> --}}
 {{-- </form> --}}  
-
     <div class="ui category search">
         <div class="ui icon input">
                 <input id="searchInput" class="prompt" type="text" placeholder="Search movies" onKeyUp="handleSearch()">
@@ -22,33 +21,31 @@
         </div>
         <div class="results"></div>
     </div>
-
 @stop
 
 
 @section('content')
-
     <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
-                <li class="ui container filmItem" >
-                    <br />
-                    <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
-                    <div class="alert-box favoed {{$filmData['title']}}">You favourited this film !!!</div>
-                    <div class="alert-box unfavoed {{$filmData['title']}}">You unfavourited this film !!!</div>
-                    <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
-                    <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
-                    <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
+            <li class="ui container filmItem" id="{{$filmData['episode_id']}}">
+                 <br />
+                 <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
+                 <div class="alert-box favoed {{$filmData['title']}}">You favourited this film, this film will go to the top !!!</div>
+                 <div class="alert-box unfavoed {{$filmData['title']}}">You unfavourited this film, this film will go to the bottom !!!</div>
+                 <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
+                 <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
+                 <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
 
-                    <label >
-                        <h4 class="ui medium red header">Favourite
-                        <input type="checkbox" id="{{$filmData['title']}}" class="checkbox" onClick="handleFavo(this.id)" />
-                        </h4>
-                    </label>
+                 <label >
+                     <h4 class="ui medium red header">Favourite
+                     <input type="checkbox" id="{{$filmData['title']}}" class="checkbox" onClick="handleFavo(this.id, {{$filmData['episode_id']}})" />
+                     </h4>
+                 </label>
 
-                    <button class="ui orange basic button">
-                        <a href="/film/{{$filmData['episode_id']}}">details</a>
-                    </button>
-                </li>
+                 <button class="ui orange basic button">
+                     <a href="/film/{{$filmData['episode_id']}}">details</a>
+                 </button>
+             </li>
         @endforeach  
     </ul>
 @stop
@@ -72,7 +69,7 @@
             }
         }
 
-        const handleFavoCheckBoxReload = () => {
+        const handlePageReload = () => {
             let checkboxes = document.getElementsByClassName('checkbox');
             let locolStoreKeys = Object.keys(window.localStorage);
             if (locolStoreKeys.length !== 0) {
@@ -84,35 +81,40 @@
             }
         }
 
-        const handleFavo = (checkBoxID) => {
-            let checkbox = document.getElementById(checkBoxID);
+        const handleFavo = (checkBoxID, liId) => {
+            //Fetch the checkbox
+            const checkbox = document.getElementById(checkBoxID);
             //two alert box in a film item div, index 0 is for favoed, index 1 is for unfavoed
-            let favoedAlertDiv = document.getElementsByClassName(checkBoxID)[0];
-            let unFavoedAlertDiv = document.getElementsByClassName(checkBoxID)[1];
-
+            const favoedAlertDiv = document.getElementsByClassName(checkBoxID)[0];
+            const unFavoedAlertDiv = document.getElementsByClassName(checkBoxID)[1];
+            //////////
+            const ul = document.querySelector('#search-field');
+            const li = document.getElementById(liId);
+            /////////
             if(checkbox.checked) {
+                ///////move the favoed div to the top of the list
+                //alert box will be disappear in 1.5 seconds
+                const favoLi = li.cloneNode(true);
                 favoedAlertDiv.style.display = 'block';
-                //alert box will be shown for 1.5 seconds
                 setTimeout(() => {
-                    return favoedAlertDiv.style.display = 'none';
+                    li.remove();
+                    ul.insertBefore(favoLi, ul.childNodes[0]);
+                    ul.getElementsByClassName(checkBoxID)[0].style.display = 'none';
                 }, 1500)
-
+                //added to local storage
                 window.localStorage.setItem(checkBoxID,'favourited');
-                                
-                
-                //move the favoed div to the top of the list
-                let filmList = document.querySelector('ul');
-                // let filmDataDivs = filmList..getElementsByClassName('filmItem');
-                // console.log(filmDataDivs.div);
 
             } else {
+                const unfavoLi = li.cloneNode(true);           
                 unFavoedAlertDiv.style.display = 'block';
                 setTimeout(() => {
-                    return unFavoedAlertDiv.style.display = 'none';
+                    li.remove();
+                    ul.appendChild(unfavoLi);
+                    ul.getElementsByClassName(checkBoxID)[1].style.display = 'none';
                 }, 1500)
+                //remove local storage
                 window.localStorage.removeItem(checkBoxID);
             }
-            //console.log(window.localStorage);
         }
 
     </script>

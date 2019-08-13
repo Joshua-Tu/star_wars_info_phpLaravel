@@ -20,8 +20,8 @@
 
 
 @section('content')
-  <div class="ui red dividing meduim header">Opening Crawl: 
-    <h2 class="ui violet small header">{{$filmData['opening_crawl']}}<h2>
+  <div class="ui red dividing huge header">Opening Crawl: 
+    <h3 class="ui violet small header">{{$filmData['opening_crawl']}}<h3>
   </div>
 
     <div>
@@ -146,3 +146,5 @@
               @endforeach  
         </div>
 @endsection   {{-- @endsection means @stop  --}} 
+
+
