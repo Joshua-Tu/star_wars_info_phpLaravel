@@ -27,11 +27,15 @@
 
 
 @section('content')
+
     <ul id="search-field">
         @foreach($orderedFilmsArr as $filmData)
                 <div class="ui container filmItem" >
                     <br />
+
                     <h3 class="ui dividing violet large header">{{$filmData['title']}}</h3>
+                    <div class="alert-box favoed">You favourited this film !!!</div>
+                    <div class="alert-box unfavoed">You unfavourited this film !!!</div>
                     <h2 class="ui brown medium header">Director: {{$filmData['director']}}</h2>
                     <h2 class="ui brown medium header">Episode: {{$filmData['episode_id']}}</h2>
                     <h2 class="ui brown medium header">Release Date: {{$filmData['release_date']}}</h2>
@@ -52,7 +56,8 @@
 
 
 @section('footer')
-    <script type="text/javascript">
+    <script type="text/javascript" >
+
         const handleSearch = () => {
             let input = document.querySelector("input");
             let searchValue = input.value.toUpperCase()
@@ -72,10 +77,8 @@
             let checkbox = document.getElementById(checkBoxID);
             if(checkbox.checked) {
                 window.localStorage.setItem(checkBoxID,'favourited');
-                
             } else {
                 window.localStorage.removeItem(checkBoxID);
-  
             }
             console.log(window.localStorage);
         }
