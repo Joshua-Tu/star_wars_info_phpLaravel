@@ -36,7 +36,6 @@
                 <div class="ui yellow tiny header">Mass: {{$character['mass']}}</div>
                 <div class="ui yellow tiny header">Hair Color: {{$character['hair_color']}}</div>
                 <div class="ui yellow tiny header">Skin Color: {{$character['skin_color']}}</div>
-                <div class="ui yellow tiny header">Mass: {{$character['mass']}}</div>
                 <div class="ui yellow tiny header">Eye Color: {{$character['eye_color']}}</div>
                 <div class="ui yellow tiny header">Birth Year: {{$character['birth_year']}}</div>
                 <div class="ui yellow tiny header">Gender: {{$character['gender']}}</div>

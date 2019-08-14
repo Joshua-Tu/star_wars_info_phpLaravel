@@ -6,7 +6,7 @@
         <title>Star Wars Info</title>
         <!-- Semantic UI -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
-        <link rel="icon" type= "image/png" href="favicon.png">
+        <link rel="icon" type= "image/png" href="../../public/favicon.png">
         <style>
           /* tooltip style for the film info page */
             .tooltip {

@@ -23,7 +23,6 @@ class FilmsController extends Controller
     {           
         $orderedFilmsArr =  $this->orderedFilmsDataArr;
         
-        // dd($_GET['search']);
         return view('pages.homepage',compact('orderedFilmsArr'));
 
     }
