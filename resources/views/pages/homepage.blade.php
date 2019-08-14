@@ -70,13 +70,26 @@
         }
 
         const handlePageReload = () => {
-            let checkboxes = document.getElementsByClassName('checkbox');
-            let locolStoreKeys = Object.keys(window.localStorage);
+            const checkboxes = document.getElementsByClassName('checkbox');
+            const locolStoreKeys = Object.keys(window.localStorage);
+            //ul contains an array of li elements
+            const ul = document.querySelector('#search-field');
+            const lis = ul.getElementsByTagName('li');
+            /////////////
             if (locolStoreKeys.length !== 0) {
                 for(let i = 0; i < checkboxes.length; i++) {
                     if(locolStoreKeys.includes(checkboxes[i].id)) {
                         checkboxes[i].checked = true;
                     }
+                }
+            }
+
+            for(let i = 0; i < lis.length; i++) {
+                const checkStatus = lis[i].getElementsByTagName('input')[0].checked;
+                if(checkStatus) {
+                    const checkedLi = lis[i].cloneNode(true);
+                    lis[i].remove();
+                    ul.insertBefore(checkedLi, ul.childNodes[0]);
                 }
             }
         }
@@ -87,7 +100,7 @@
             //two alert box in a film item div, index 0 is for favoed, index 1 is for unfavoed
             const favoedAlertDiv = document.getElementsByClassName(checkBoxID)[0];
             const unFavoedAlertDiv = document.getElementsByClassName(checkBoxID)[1];
-            //////////
+            //////////ul & li are for uplifting the position of checked li elements
             const ul = document.querySelector('#search-field');
             const li = document.getElementById(liId);
             /////////
