@@ -8,7 +8,6 @@ use App\Http\Apis\GetRemoteData;
 
 class FilmsController extends Controller
 {
-    protected $orderedFilmsDataArr;
 
     public function __construct() {
         //The array_sort LARAVEL HELPER FUNCTION sorts the array by the results of the given Closure:
